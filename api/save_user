@@ -1,0 +1,84 @@
+<?php
+require_once '../config/database.php';
+require_once '../includes/auth.php';
+session_start();
+
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+    echo json_encode(['success' => false, 'message' => 'Доступ запрещен']);
+    exit();
+}
+
+$user_id = $_POST['id'] ?? null;
+$username = trim($_POST['username'] ?? '');
+$email = trim($_POST['email'] ?? '');
+$password = $_POST['password'] ?? null;
+$role = $_POST['role'] ?? 'user';
+$is_active = isset($_POST['is_active']) ? (int)$_POST['is_active'] : 1;
+$bio = trim($_POST['bio'] ?? '');
+
+// Валидация
+if (empty($username) || empty($email)) {
+    echo json_encode(['success' => false, 'message' => 'Заполните обязательные поля']);
+    exit();
+}
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo json_encode(['success' => false, 'message' => 'Неверный формат email']);
+    exit();
+}
+
+if (!preg_match('/^[a-zA-Z0-9_]{3,20}$/', $username)) {
+    echo json_encode(['success' => false, 'message' => 'Имя пользователя должно содержать только латинские буквы, цифры и подчеркивания (3-20 символов)']);
+    exit();
+}
+
+try {
+    // Проверка уникальности username и email
+    $check_sql = "SELECT id FROM users WHERE (username = ? OR email = ?)";
+    $check_params = [$username, $email];
+    
+    if ($user_id) {
+        $check_sql .= " AND id != ?";
+        $check_params[] = $user_id;
+    }
+    
+    $stmt = $pdo->prepare($check_sql);
+    $stmt->execute($check_params);
+    
+    if ($stmt->rowCount() > 0) {
+        echo json_encode(['success' => false, 'message' => 'Пользователь с таким именем или email уже существует']);
+        exit();
+    }
+    
+    if ($user_id) {
+        // Обновление пользователя
+        if ($password) {
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $sql = "UPDATE users SET username = ?, email = ?, password = ?, role = ?, is_active = ?, bio = ?, updated_at = NOW() WHERE id = ?";
+            $params = [$username, $email, $hashed_password, $role, $is_active, $bio, $user_id];
+        } else {
+            $sql = "UPDATE users SET username = ?, email = ?, role = ?, is_active = ?, bio = ?, updated_at = NOW() WHERE id = ?";
+            $params = [$username, $email, $role, $is_active, $bio, $user_id];
+        }
+    } else {
+        // Создание пользователя
+        if (!$password) {
+            echo json_encode(['success' => false, 'message' => 'Пароль обязателен для нового пользователя']);
+            exit();
+        }
+        
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO users (username, email, password, role, is_active, bio) VALUES (?, ?, ?, ?, ?, ?)";
+        $params = [$username, $email, $hashed_password, $role, $is_active, $bio];
+    }
+    
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    
+    $action = $user_id ? 'обновлен' : 'создан';
+    echo json_encode(['success' => true, 'message' => "Пользователь успешно $action"]);
+    
+} catch(PDOException $e) {
+    echo json_encode(['success' => false, 'message' => 'Ошибка базы данных: ' . $e->getMessage()]);
+}
+?>

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наша команда DeepWorld | Разработчики и администрация</title>
+    <meta name="description" content="Познакомьтесь с командой разработчиков DeepWorld - людей, которые создают уникальный Minecraft проект">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    <style>
+        /* Стили для страницы "Наша команда" */
+        .team-hero {
+            position: relative;
+            padding: 6rem 0 4rem;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            overflow: hidden;
+            margin-top: 64px;
+        }
+        
+        .team-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(66, 135, 245, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(52, 168, 83, 0.1) 0%, transparent 50%);
+        }
+        
+        .team-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .team-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .team-title h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .team-title p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .founder-section {
+            margin-bottom: 5rem;
+        }
+        
+        .founder-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .founder-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+        }
+        
+        .founder-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .founder-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        .founder-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #1a1a2e;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            flex-shrink: 0;
+        }
+        
+        .founder-info h2 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .founder-role {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), rgba(255, 165, 0, 0.2));
+            color: #FFD700;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .founder-bio {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .founder-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .founder-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+        
+        .founder-stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .founder-stat-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .team-member {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            border-color: #4285F4;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #4285F4, #34A853);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+            margin: 0 auto 1.5rem;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .member-info h3 {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .member-role {
+            color: #4285F4;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .member-bio {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .member-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .skill-tag {
+            background: rgba(66, 135, 245, 0.1);
+            color: #4285F4;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(66, 135, 245, 0.2);
+        }
+        
+        .join-team {
+            text-align: center;
+            margin: 5rem 0;
+            padding: 3rem;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .join-team h2 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .join-team p {
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+        
+        .vacancies {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .vacancy {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .vacancy:hover {
+            background: rgba(66, 135, 245, 0.1);
+            border-color: #4285F4;
+        }
+        
+        .vacancy h4 {
+            color: white;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .vacancy p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .team-title h1 {
+                font-size: 2.2rem;
+            }
+            
+            .founder-card {
+                padding: 2rem;
+            }
+            
+            .founder-avatar {
+                width: 120px;
+                height: 120px;
+                font-size: 2.5rem;
+            }
+            
+            .founder-info h2 {
+                font-size: 1.75rem;
+            }
+            
+            .join-team {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Анимация загрузки -->
+    <div id="loading" class="loading">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="loading-dot" style="--delay: 0s;"></div>
+                <div class="loading-dot" style="--delay: 0.2s;"></div>
+                <div class="loading-dot" style="--delay: 0.4s;"></div>
+            </div>
+            <p class="loading-text">Знакомство с командой...</p>
+        </div>
+    </div>
+
+    <!-- Кнопка наверх -->
+    <button id="scrollTop" class="scroll-top-btn">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Шапка (одинаковая для всех страниц) -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">⚔️</span>
+                <div class="logo-text">
+                    <h1>DeepWorld</h1>
+                    <p class="tagline">Мир приключений в духе Мира Приключений</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.php">Главная</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="servers.html">Описание серверов</a></li>
+                    <li><a href="donate.html">Донат</a></li>
+                    <li><a href="team.html" class="active">Наша команда</a></li>
+                    <li><a href="launcher.html" class="btn btn-outline">Скачать лаунчер</a></li>
+                    <?php
+                    session_start();
+                    if(isset($_SESSION['user_id'])): ?>
+                        <li><a href="dashboard.php">Профиль (<?php echo htmlspecialchars($_SESSION['username']); ?>)</a></li>
+                        <li><a href="../api/logout.php" class="btn btn-outline">Выйти</a></li>
+                    <?php else: ?>
+                        <li><a href="../api/login.php" class="btn btn-outline">Войти</a></li>
+                        <li><a href="../api/register.php" class="btn btn-primary">Регистрация</a></li>
+                    <?php endif; ?>
+                </ul>
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+    <section class="team-hero">
+        <div class="container">
+            <div class="team-title">
+                <h1>Команда DeepWorld</h1>
+                <p>Познакомьтесь с людьми, которые создают уникальную вселенную Minecraft</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Основной контент -->
+    <main class="container team-content">
+        <!-- Основатель -->
+        <div class="founder-section">
+            <div class="founder-card">
+                <div class="founder-header">
+                    <div class="founder-avatar">
+                        ДЧ
+                    </div>
+                    <div class="founder-info">
+                        <h2>Даниил Челноков</h2>
+                        <div class="founder-role">
+                            <i class="fas fa-crown"></i>
+                            Основатель и ведущий разработчик
+                        </div>
+                        <p class="founder-bio">
+                            Основатель проекта DeepWorld с более чем 7-летним опытом администрирования крупных СНГ Minecraft проектов. 
+                            Начал разработку проекта в январе 2026 года с целью создания уникальной игровой вселенной, 
+                            сочетающей лучшие аспекты sandbox-игр с захватывающим сюжетом и активным сообществом.
+                        </p>
+                        <div class="social-links" style="justify-content: flex-start; margin-top: 1rem;">
+                            <a href="#" class="tooltip" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="tooltip" title="Discord">
+                                <i class="fab fa-discord"></i>
+                            </a>
+                            <a href="#" class="tooltip" title="Telegram">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="founder-stats">
+                    <div class="founder-stat">
+                        <div class="founder-stat-number">7+</div>
+                        <div class="founder-stat-label">Лет опыта</div>
+                    </div>
+                    <div class="founder-stat">
+                        <div class="founder-stat-number">50+</div>
+                        <div class="founder-stat-label">Проектов</div>
+                    </div>
+                    <div class="founder-stat">
+                        <div class="founder-stat-number">100%</div>
+                        <div class="founder-stat-label">Приверженность</div>
+                    </div>
+                    <div class="founder-stat">
+                        <div class="founder-stat-number">24/7</div>
+                        <div class="founder-stat-label">Доступность</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Текущая команда -->
+        <h2 style="text-align: center; color: white; font-size: 2rem; margin-bottom: 2rem;">Текущая команда</h2>
+        
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-avatar" style="background: linear-gradient(45deg, #4285F4, #34A853);">
+                    ДЧ
+                </div>
+                <div class="member-info">
+                    <h3>Даниил Челноков</h3>
+                    <div class="member-role">
+                        <i class="fas fa-code"></i>
+                        Full-Stack разработчик
+                    </div>
+                    <p class="member-bio">
+                        Отвечает за всю техническую часть проекта: от бэкенда на PHP до фронтенда на JavaScript. 
+                        Разрабатывает архитектуру, пишет код и обеспечивает безопасность системы.
+                    </p>
+                    <div class="member-skills">
+                        <span class="skill-tag">PHP</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">Git</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Пока только один активный разработчик, но место для будущих участников команды -->
+            <div class="team-member" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)); opacity: 0.8;">
+                <div class="member-avatar" style="background: linear-gradient(45deg, #666, #999);">
+                    <i class="fas fa-question"></i>
+                </div>
+                <div class="member-info">
+                    <h3>Будущий участник</h3>
+                    <div class="member-role">
+                        <i class="fas fa-user-plus"></i>
+                        Открытая вакансия
+                    </div>
+                    <p class="member-bio">
+                        Это место ждет нового участника команды! Мы ищем талантливых людей, 
+                        готовых помочь в развитии проекта.
+                    </p>
+                    <div class="member-skills">
+                        <span class="skill-tag">Minecraft</span>
+                        <span class="skill-tag">Творчество</span>
+                        <span class="skill-tag">Командная работа</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-member" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)); opacity: 0.8;">
+                <div class="member-avatar" style="background: linear-gradient(45deg, #666, #999);">
+                    <i class="fas fa-question"></i>
+                </div>
+                <div class="member-info">
+                    <h3>Будущий участник</h3>
+                    <div class="member-role">
+                        <i class="fas fa-user-plus"></i>
+                        Открытая вакансия
+                    </div>
+                    <p class="member-bio">
+                        Присоединяйтесь к команде и помогите создать уникальную игровую вселенную!
+                    </p>
+                    <div class="member-skills">
+                        <span class="skill-tag">Разработка</span>
+                        <span class="skill-tag">Дизайн</span>
+                        <span class="skill-tag">Администрирование</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Присоединиться к команде -->
+        <div class="join-team">
+            <h2><i class="fas fa-handshake"></i> Присоединиться к команде</h2>
+            <p>
+                Мы находимся в активной стадии разработки и ищем талантливых людей, 
+                готовых помочь в создании уникального Minecraft проекта. 
+                Если вы разделяете нашу страсть к играм и хотите внести свой вклад — добро пожаловать!
+            </p>
+            
+            <a href="#" class="btn btn-primary" onclick="showContactForm()" style="margin-bottom: 2rem;">
+                <i class="fas fa-envelope"></i> Связаться с нами
+            </a>
+            
+            <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.5rem;">Требуемые специалисты:</h3>
+            <div class="vacancies">
+                <div class="vacancy">
+                    <h4><i class="fas fa-paint-brush"></i> Дизайнер/Художник</h4>
+                    <p>Создание текстур, моделей и визуального контента для проекта</p>
+                </div>
+                
+                <div class="vacancy">
+                    <h4><i class="fas fa-code"></i> Разработчик плагинов</h4>
+                    <p>Разработка кастомных плагинов и модов для Minecraft</p>
+                </div>
+                
+                <div class="vacancy">
+                    <h4><i class="fas fa-headset"></i> Администратор/Модератор</h4>
+                    <p>Помощь в управлении сообществом и поддержке игроков</p>
+                </div>
+                
+                <div class="vacancy">
+                    <h4><i class="fas fa-gamepad"></i> Геймдизайнер</h4>
+                    <p>Разработка игровых механик, квестов и контента</p>
+                </div>
+            </div>
+            
+            <p style="margin-top: 2rem; color: rgba(255, 255, 255, 0.6); font-size: 0.9rem;">
+                <i class="fas fa-info-circle"></i> Опыт работы с Minecraft и знание английского языка будут преимуществом
+            </p>
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-icon">⚔️</span>
+                        <div class="logo-text">
+                            <h3>DeepWorld</h3>
+                            <p>Мир приключений в духе Мира Приключений</p>
+                        </div>
+                    </div>
+                    <p class="footer-description">Проект создан с любовью к миру Minecraft и духу приключений</p>
+                    <div class="social-links">
+                        <a href="#" onclick="joinDiscord()"><i class="fab fa-discord"></i></a>
+                        <a href="#" onclick="openVK()"><i class="fab fa-vk"></i></a>
+                        <a href="#" onclick="openYouTube()"><i class="fab fa-youtube"></i></a>
+                        <a href="#" onclick="openGitHub()"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="links-column">
+                        <h4>Навигация</h4>
+                        <ul>
+                            <li><a href="../index.php">Главная</a></li>
+                            <li><a href="about.html">О нас</a></li>
+                            <li><a href="servers.html">Описание серверов</a></li>
+                            <li><a href="donate.html">Донат</a></li>
+                            <li><a href="team.html">Наша команда</a></li>
+                        </ul>
+                    </div>
+                    <div class="links-column">
+                        <h4>Ресурсы</h4>
+                        <ul>
+                            <li><a href="launcher.html">Скачать лаунчер</a></li>
+                            <li><a href="#">Список модов</a></li>
+                            <li><a href="#">Карта мира</a></li>
+                            <li><a href="#">Гайды</a></li>
+                            <li><a href="#">Частые вопросы</a></li>
+                        </ul>
+                    </div>
+                    <div class="links-column">
+                        <h4>Команда</h4>
+                        <ul>
+                            <li><a href="team.html#founder">Основатель</a></li>
+                            <li><a href="team.html#join">Присоединиться</a></li>
+                            <li><a href="#">Вакансии</a></li>
+                            <li><a href="#">Контакты</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024-2026 DeepWorld. Все права защищены.</p>
+                <p class="disclaimer">DeepWorld является неофициальным проектом, не связанным с Mojang AB.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script>
+        // Анимация загрузки
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, 800);
+            
+            // Анимация карточек команды
+            const teamMembers = document.querySelectorAll('.team-member');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 200);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px'
+            });
+            
+            teamMembers.forEach(member => {
+                member.style.opacity = '0';
+                member.style.transform = 'translateY(20px)';
+                member.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(member);
+            });
+        });
+        
+        // Форма связи
+        function showContactForm() {
+            showNotification('Для связи с командой присоединяйтесь к нашему Discord серверу', 'info');
+        }
+        
+        // Функции для социальных сетей
+        function joinDiscord() {
+            showNotification('Присоединяйтесь к нашему Discord серверу для связи с командой!', 'info');
+        }
+        
+        function openVK() {
+            showNotification('Мы ВКонтакте!', 'info');
+        }
+        
+        function openYouTube() {
+            showNotification('Наш YouTube канал', 'info');
+        }
+        
+        function openGitHub() {
+            showNotification('Исходный код на GitHub', 'info');
+        }
+        
+        // Показ уведомлений
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+                <button onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.style.opacity = '0';
+                    setTimeout(() => notification.remove(), 300);
+                }
+            }, 5000);
+        }
+        
+        // Инструмент подсказки
+        document.querySelectorAll('.tooltip').forEach(tooltip => {
+            tooltip.addEventListener('mouseenter', function() {
+                const title = this.getAttribute('title');
+                if (title) {
+                    const tooltipText = document.createElement('span');
+                    tooltipText.className = 'tooltip-text';
+                    tooltipText.textContent = title;
+                    this.appendChild(tooltipText);
+                    this.removeAttribute('title');
+                }
+            });
+            
+            tooltip.addEventListener('mouseleave', function() {
+                const tooltipText = this.querySelector('.tooltip-text');
+                if (tooltipText) {
+                    this.setAttribute('title', tooltipText.textContent);
+                    tooltipText.remove();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

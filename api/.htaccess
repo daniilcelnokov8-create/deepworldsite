@@ -1,0 +1,19 @@
+# .htaccess для папки api/
+RewriteEngine On
+
+# Разрешаем выполнение PHP файлов
+Options +ExecCGI
+AddHandler application/x-httpd-php .php
+
+# Запрещаем просмотр содержимого папки
+Options -Indexes
+
+# Разрешаем доступ ко всем файлам
+Order Allow,Deny
+Allow from all
+
+# Дополнительная защита
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|inc|bak)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>

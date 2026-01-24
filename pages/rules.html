@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правила проекта - DeepWorld</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Специальные стили для страницы правил */
+        .rules-wrapper {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: calc(100vh - 200px);
+        }
+        
+        .rules-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .rules-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .rules-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .rules-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .rules-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            padding: 3rem;
+        }
+        
+        .rules-section {
+            margin-bottom: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .rules-section:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .section-title i {
+            color: #4285F4;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            background: rgba(66, 135, 245, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .rules-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .rule-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border-left: 4px solid #4285F4;
+            transition: all 0.3s ease;
+        }
+        
+        .rule-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+        
+        .rule-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #4285F4, #34A853);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .rule-content {
+            flex: 1;
+        }
+        
+        .rule-content h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .rule-content p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .rule-penalty {
+            color: #EA4335;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            background: rgba(234, 67, 53, 0.1);
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, rgba(251, 188, 5, 0.1), rgba(255, 109, 0, 0.05));
+            border: 1px solid rgba(251, 188, 5, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .warning-title {
+            color: #FBBC05;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .warning-text {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+        
+        .important-note {
+            background: linear-gradient(135deg, rgba(66, 135, 245, 0.1), rgba(52, 168, 83, 0.05));
+            border: 1px solid rgba(66, 135, 245, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .important-title {
+            color: #4285F4;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .important-text {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+        
+        .rules-footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .rules-footer a {
+            color: #4285F4;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .rules-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .rules-container {
+                padding: 0 1rem;
+            }
+            
+            .rules-title {
+                font-size: 2.2rem;
+            }
+            
+            .rules-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .rules-card {
+                padding: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .rule-item {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .rule-number {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .rules-wrapper {
+                padding: 2rem 0;
+            }
+            
+            .rules-title {
+                font-size: 1.8rem;
+            }
+            
+            .rules-card {
+                padding: 1.5rem;
+            }
+            
+            .rule-item {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Анимация загрузки -->
+    <div id="loading" class="loading">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="loading-dot" style="--delay: 0s;"></div>
+                <div class="loading-dot" style="--delay: 0.2s;"></div>
+                <div class="loading-dot" style="--delay: 0.4s;"></div>
+            </div>
+            <p class="loading-text">Загрузка правил проекта...</p>
+        </div>
+    </div>
+
+    <!-- Кнопка наверх -->
+    <button id="scrollTop" class="scroll-top-btn">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">⚔️</span>
+                <div class="logo-text">
+                    <h1>DeepWorld</h1>
+                    <p class="tagline">Мир приключений в духе AdventureTime!</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/index.php">Главная</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="servers.html">Описание серверов</a></li>
+                    <li><a href="donate.html">Донат</a></li>
+                    <li><a href="team.html">Наша команда</a></li>
+                    <li><a href="/api/login.php">Вход</a></li>
+                    <li><a href="/api/register.php">Регистрация</a></li>
+                    <li><a href="rules.html" class="active">Правила</a></li>
+                </ul>
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <div class="rules-wrapper">
+        <div class="rules-container">
+            <div class="rules-header">
+                <h1 class="rules-title">Правила проекта DeepWorld</h1>
+                <p class="rules-subtitle">Для поддержания дружелюбной и безопасной атмосферы в нашем сообществе, все участники обязаны соблюдать следующие правила</p>
+            </div>
+            
+            <div class="rules-card">
+                <!-- Основные правила -->
+                <div class="rules-section">
+                    <div class="section-title">
+                        <i class="fas fa-book"></i>
+                        <span>Основные правила поведения</span>
+                    </div>
+                    
+                    <ul class="rules-list">
+                        <li class="rule-item">
+                            <div class="rule-number">1</div>
+                            <div class="rule-content">
+                                <h4>Уважение к другим игрокам</h4>
+                                <p>Запрещены оскорбления, унижение, дискриминация, провокации, троллинг и любой другой вид токсичного поведения по отношению к другим участникам сообщества.</p>
+                                <div class="rule-penalty">Наказание: предупреждение, мут, бан</div>
+                            </div>
+                        </li>
+                        
+                        <li class="rule-item">
+                            <div class="rule-number">2</div>
+                            <div class="rule-content">
+                                <h4>Запрет нецензурной лексики</h4>
+                                <p>Использование мата и нецензурных выражений в общественных чатах запрещено. В приватных беседах — на усмотрение участников.</p>
+                                <div class="rule-penalty">Наказание: мут, предупреждение</div>
+                            </div>
+                        </li>
+                        
+                        <li class="rule-item">
+                            <div class="rule-number">3</div>
+                            <div class="rule-content">
+                                <h4>Спам и флуд</h4>
+                                <p>Запрещено отправлять повторяющиеся сообщения, CAPS LOCK, бесполезную информацию и любой другой контент, мешающий общению.</p>
+                                <div class="rule-penalty">Наказание: мут, предупреждение</div>
+                            </div>
+                        </li>
+                        
+                        <li class="rule-item">
+                            <div class="rule-number">4</div>
+                            <div class="rule-content">
+                                <h4>Реклама и ссылки</h4>
+                                <p>Запрещена реклама других проектов, серверов, сайтов без согласования с администрацией. Ссылки на вредоносные или подозрительные ресурсы также запрещены.</p>
+                                <div class="rule-penalty">Наказание: бан аккаунта</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Правила игры -->
+                <div class="rules-section">
+                    <div class="section-title">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Правила игрового процесса</span>
+                    </div>
+                    
+                    <ul class="rules-list">
+                        <li class="rule-item">
+                            <div class="rule-number">5</div>
+                            <div class="rule-content">
+                                <h4>Запрет читов и эксплуатации багов</h4>
+                                <p>Использование читов, кликеров, модов, дающих нечестное преимущество, а также эксплуатация багов игры строго запрещены.</p>
+                                <div class="rule-penalty">Наказание: перманентный бан</div>
+                            </div>
+                        </li>
+                        
+                        <li class="rule-item">
+                            <div class="rule-number">6</div>
+                            <div class="rule-content">
+                                <h4>Гриферство и воровство</h4>
+                                <p>Запрещено уничтожать или портить чужие постройки, красть предметы из чужих сундуков без разрешения владельца.</p>
+                                <div class="rule-penalty">Наказание: возврат предметов, бан</div>
+                            </div>
+                        </li>
+                        
+                        <li class="rule-item">
+                            <div class="rule-number">7</div>
+                            <div class="rule-content">
+                                <h4>Мультиаккаунты</h4>
+                                <p>Использование нескольких аккаунтов для получения несправедливого преимущества запрещено. Допускается до 2 аккаунтов на одного игрока.</p>
+                                <div class="rule-penalty">Наказание: блокировка всех аккаунтов</div>
+                            </div>
+                        </li>
+                        
+                        <li class="rule-item">
+                            <div class="rule-number">8</div>
+                            <div class="rule-content">
+                                <h4>АФК-фермы и лаг машины</h4>
+                                <p>Создание ферм, вызывающих сильный лаг сервера, запрещено. АФК-фермы разрешены только в лимитированном количестве.</p>
+                                <div class="rule-penalty">Наказание: снос фермы, предупреждение</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Предупреждение -->
+                <div class="warning-box">
+                    <div class="warning-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Важное предупреждение</span>
+                    </div>
+                    <p class="warning-text">
+                        Администрация оставляет за собой право принимать решения по спорным ситуациям, не описанным в правилах, исходя из принципов справедливости и сохранения здоровой атмосферы на проекте. 
+                        Незнание правил не освобождает от ответственности.
+                    </p>
+                </div>
+                
+                <!-- Донат правила -->
+                <div class="rules-section">
+                    <div class="section-title">
+                        <i class="fas fa-gem"></i>
+                        <span>Правила доната и привилегий</span>
+                    </div>
+                    
+                    <ul class="rules-list">
+                        <li class="rule-item">
+                            <div class="rule-number">9</div>
+                            <div class="rule-content">
+                                <h4>Возврат донат средств</h4>
+                                <p>Донат является добровольным пожертвованием на развитие проекта. Возврат средств осуществляется только в исключительных случаях по решению администрации.</p>
+                                <div class="rule-penalty">Не подлежит возврату</div>
+                            </div>
+                        </li>
+                        
+                        <li class="rule-item">
+                            <div class="rule-number">10</div>
+                            <div class="rule-content">
+                                <h4>Передача привилегий</h4>
+                                <p>Привилегии привязаны к аккаунту и не могут быть переданы другому игроку. Продажа или обмен привилегий запрещены.</p>
+                                <div class="rule-penalty">Наказание: снятие привилегий</div>
+                            </div>
+                        </li>
+                        
+                        <li class="rule-item">
+                            <div class="rule-number">11</div>
+                            <div class="rule-content">
+                                <h4>Использование привилегий</h4>
+                                <p>Использование донат привилегий для нарушения правил, создания преимущества, мешающего обычным игрокам, запрещено.</p>
+                                <div class="rule-penalty">Наказание: снятие привилегий, бан</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Важное примечание -->
+                <div class="important-note">
+                    <div class="important-title">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Как сообщить о нарушении?</span>
+                    </div>
+                    <p class="important-text">
+                        Если вы стали свидетелем нарушения правил, пожалуйста, сообщите об этом администрации через тикет-систему в Discord или напишите в личные сообщения администратору. 
+                        Прикладывайте доказательства (скриншоты, видео, логи) для ускорения рассмотрения заявки.
+                    </p>
+                </div>
+                
+                <!-- Заключение -->
+                <div class="rules-footer">
+                    <p>Последнее обновление правил: 01 января 2024 года</p>
+                    <p>Присоединяясь к проекту DeepWorld, вы автоматически соглашаетесь с этими правилами.</p>
+                    <p style="margin-top: 1rem;">
+                        <a href="/api/register.php">Вернуться к регистрации</a> | 
+                        <a href="/index.php">На главную</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-icon">⚔️</span>
+                        <div class="logo-text">
+                            <h3>DeepWorld</h3>
+                            <p>Мир приключений в духе AdventureTime!</p>
+                        </div>
+                    </div>
+                    <p class="footer-description">Проект создан с любовью к миру Minecraft и AdventureTime!/p>
+                </div>
+                <div class="footer-links">
+                    <div class="links-column">
+                        <h4>Навигация</h4>
+                        <ul>
+                            <li><a href="/index.php">Главная</a></li>
+                            <li><a href="about.html">О нас</a></li>
+                            <li><a href="servers.html">Описание серверов</a></li>
+                            <li><a href="donate.html">Донат</a></li>
+                            <li><a href="team.html">Наша команда</a></li>
+                        </ul>
+                    </div>
+                    <div class="links-column">
+                        <h4>Документы</h4>
+                        <ul>
+                            <li><a href="rules.html" class="active">Правила проекта</a></li>
+                            <li><a href="terms.html">Условия использования</a></li>
+                            <li><a href="privacy.html">Политика конфиденциальности</a></li>
+                            <li><a href="faq.html">Частые вопросы</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DeepWorld. Все права защищены.</p>
+                <p class="disclaimer">DeepWorld является неофициальным проектом, не связанным с Mojang AB или Cartoon Network.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Скрываем загрузку
+            setTimeout(() => {
+                const loading = document.getElementById('loading');
+                if (loading) {
+                    loading.style.opacity = '0';
+                    setTimeout(() => {
+                        loading.style.display = 'none';
+                    }, 300);
+                }
+            }, 500);
+            
+            // Инициализация мобильного меню
+            initMobileMenu();
+        });
+        
+        // Функция инициализации мобильного меню
+        function initMobileMenu() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navMenu = document.querySelector('nav ul');
+            
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                    menuToggle.innerHTML = navMenu.classList.contains('active') 
+                        ? '<i class="fas fa-times"></i>' 
+                        : '<i class="fas fa-bars"></i>';
+                });
+                
+                // Закрытие меню при клике на ссылку
+                document.querySelectorAll('nav a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('active');
+                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    });
+                });
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О проекте DeepWorld | История создания и цели</title>
+    <meta name="description" content="Узнайте историю создания DeepWorld - уникального Minecraft проекта с собственным лаунчером и кастомными мирами">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    <style>
+        /* Специфичные стили для страницы "О нас" */
+        .about-hero {
+            position: relative;
+            padding: 6rem 0 4rem;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            overflow: hidden;
+            margin-top: 64px;
+        }
+        
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 70% 20%, rgba(66, 135, 245, 0.1) 0%, transparent 50%);
+        }
+        
+        .about-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .about-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .about-title h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .about-title p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 4rem auto;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #4285F4, #34A853);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #4285F4, #34A853);
+            border: 3px solid #1a1a2e;
+        }
+        
+        .timeline-date {
+            color: #4285F4;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .timeline-content {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .timeline-content h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-content p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .mission-vision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .mission-card, .vision-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        
+        .mission-card h2, .vision-card h2 {
+            color: white;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+        
+        .mission-card h2 i {
+            color: #4285F4;
+        }
+        
+        .vision-card h2 i {
+            color: #34A853;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 4rem 0;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-icon {
+            font-size: 2.5rem;
+            color: #4285F4;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .stat-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+        }
+        
+        .tech-stack {
+            margin: 4rem 0;
+        }
+        
+        .tech-stack h2 {
+            text-align: center;
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .tech-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .tech-item:hover {
+            transform: translateY(-5px);
+            border-color: #4285F4;
+            box-shadow: 0 10px 30px rgba(66, 135, 245, 0.2);
+        }
+        
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #4285F4;
+        }
+        
+        .tech-name {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tech-desc {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+        }
+        
+        @media (max-width: 768px) {
+            .about-title h1 {
+                font-size: 2.2rem;
+            }
+            
+            .timeline {
+                padding-left: 1.5rem;
+            }
+            
+            .timeline-item {
+                padding-left: 1.5rem;
+            }
+            
+            .mission-vision {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Анимация загрузки -->
+    <div id="loading" class="loading">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="loading-dot" style="--delay: 0s;"></div>
+                <div class="loading-dot" style="--delay: 0.2s;"></div>
+                <div class="loading-dot" style="--delay: 0.4s;"></div>
+            </div>
+            <p class="loading-text">Загрузка истории проекта...</p>
+        </div>
+    </div>
+
+    <!-- Кнопка наверх -->
+    <button id="scrollTop" class="scroll-top-btn">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Шапка (одинаковая для всех страниц) -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">⚔️</span>
+                <div class="logo-text">
+                    <h1>DeepWorld</h1>
+                    <p class="tagline">Мир приключений в духе Мира Приключений</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.php">Главная</a></li>
+                    <li><a href="about.html" class="active">О нас</a></li>
+                    <li><a href="servers.html">Описание серверов</a></li>
+                    <li><a href="donate.html">Донат</a></li>
+                    <li><a href="team.html">Наша команда</a></li>
+                    <li><a href="launcher.html" class="btn btn-outline">Скачать лаунчер</a></li>
+                    <?php
+                    session_start();
+                    if(isset($_SESSION['user_id'])): ?>
+                        <li><a href="dashboard.php">Профиль (<?php echo htmlspecialchars($_SESSION['username']); ?>)</a></li>
+                        <li><a href="../api/logout.php" class="btn btn-outline">Выйти</a></li>
+                    <?php else: ?>
+                        <li><a href="../api/login.php" class="btn btn-outline">Войти</a></li>
+                        <li><a href="../api/register.php" class="btn btn-primary">Регистрация</a></li>
+                    <?php endif; ?>
+                </ul>
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="about-title">
+                <h1>История DeepWorld</h1>
+                <p>От идеи до реализации: как создавался уникальный Minecraft проект с собственным лаунчером и кастомными мирами</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Основной контент -->
+    <main class="container about-content">
+        <!-- Таймлайн развития -->
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    Январь 2026
+                </div>
+                <div class="timeline-content">
+                    <h3>Начало разработки</h3>
+                    <p>Проект DeepWorld начал свою разработку в январе 2026 года. Основатель проекта, Даниил Челноков (donelopomelo), имея более 7 лет опыта в администрировании крупных СНГ Minecraft проектов, решил создать что-то уникальное.</p>
+                    <p>Первые недели были посвящены планированию архитектуры проекта, разработке концепции и созданию технического задания.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    Февраль 2026
+                </div>
+                <div class="timeline-content">
+                    <h3>Разработка веб-инфраструктуры</h3>
+                    <p>Началась активная разработка веб-части проекта. Были созданы:</p>
+                    <ul style="color: rgba(255, 255, 255, 0.8); margin-left: 1.5rem; line-height: 1.6;">
+                        <li>Главная страница с современным дизайном</li>
+                        <li>Система регистрации и авторизации</li>
+                        <li>Личный кабинет пользователя</li>
+                        <li>Административная панель</li>
+                        <li>База данных с защитой от SQL-инъекций</li>
+                    </ul>
+                    <p>Все элементы были разработаны с нуля с акцентом на безопасность и удобство пользователей.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    Текущий этап
+                </div>
+                <div class="timeline-content">
+                    <h3>Активная разработка</h3>
+                    <p>Сейчас проект находится в стадии активной разработки. Ежедневно добавляются новые функции и улучшается существующий функционал.</p>
+                    <p><strong>Что уже реализовано:</strong></p>
+                    <ul style="color: rgba(255, 255, 255, 0.8); margin-left: 1.5rem; line-height: 1.6;">
+                        <li>Полноценная система регистрации и авторизации</li>
+                        <li>Личный кабинет с статистикой</li>
+                        <li>Админ-панель для управления проектом</li>
+                        <li>Адаптивный дизайн для всех устройств</li>
+                        <li>Система безопасности с защитой от атак</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    Ближайшие планы
+                </div>
+                <div class="timeline-content">
+                    <h3>Планы на будущее</h3>
+                    <p><strong>В разработке:</strong></p>
+                    <ul style="color: rgba(255, 255, 255, 0.8); margin-left: 1.5rem; line-height: 1.6;">
+                        <li>Собственный лаунчер для автоматической установки модов</li>
+                        <li>Кастомные миры и уникальные биомы</li>
+                        <li>Сюжетные квесты с ветвящимся сюжетом</li>
+                        <li>Система достижений и наград</li>
+                        <li>Интеграция с Discord для уведомлений</li>
+                    </ul>
+                    <p><strong>Долгосрочные цели:</strong></p>
+                    <ul style="color: rgba(255, 255, 255, 0.8); margin-left: 1.5rem; line-height: 1.6;">
+                        <li>Создание активного сообщества игроков</li>
+                        <li>Регулярные обновления и новые контент</li>
+                        <li>Поддержка нескольких игровых режимов</li>
+                        <li>Система рейтинга и лидербордов</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Миссия и Видение -->
+        <div class="mission-vision">
+            <div class="mission-card">
+                <h2><i class="fas fa-bullseye"></i> Наша миссия</h2>
+                <p>Создать уникальную игровую вселенную в Minecraft, где каждый игрок сможет найти свой путь приключений. Мы стремимся объединить лучшие аспекты sandbox-игр с захватывающим сюжетом и активным сообществом.</p>
+            </div>
+            
+            <div class="vision-card">
+                <h2><i class="fas fa-eye"></i> Наше видение</h2>
+                <p>Стать одним из ведущих Minecraft проектов в СНГ-сегменте, предлагая игрокам не просто сервер, а полноценную игровую вселенную с постоянно развивающимся миром, интересными механиками и дружественным сообществом.</p>
+            </div>
+        </div>
+
+        <!-- Статистика -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="stat-number">10,000+</div>
+                <div class="stat-label">Строк кода</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-number">200+</div>
+                <div class="stat-label">Часов разработки</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-file-code"></i>
+                </div>
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Файлов проекта</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-number">1</div>
+                <div class="stat-label">Активных разработчиков</div>
+            </div>
+        </div>
+
+        <!-- Технологии -->
+        <div class="tech-stack">
+            <h2>Технологический стек</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-php"></i>
+                    </div>
+                    <div class="tech-name">PHP 8.2+</div>
+                    <div class="tech-desc">Бэкенд разработка</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <div class="tech-name">JavaScript</div>
+                    <div class="tech-desc">Клиентская логика</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <div class="tech-name">HTML5</div>
+                    <div class="tech-desc">Семантическая верстка</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
+                    <div class="tech-name">CSS3</div>
+                    <div class="tech-desc">Современные стили</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="tech-name">MySQL</div>
+                    <div class="tech-desc">База данных</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-git-alt"></i>
+                    </div>
+                    <div class="tech-name">Git</div>
+                    <div class="tech-desc">Контроль версий</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-icon">⚔️</span>
+                        <div class="logo-text">
+                            <h3>DeepWorld</h3>
+                            <p>Мир приключений в духе Мира Приключений</p>
+                        </div>
+                    </div>
+                    <p class="footer-description">Проект создан с любовью к миру Minecraft и духу приключений</p>
+                    <div class="social-links">
+                        <a href="#" onclick="joinDiscord()"><i class="fab fa-discord"></i></a>
+                        <a href="#" onclick="openVK()"><i class="fab fa-vk"></i></a>
+                        <a href="#" onclick="openYouTube()"><i class="fab fa-youtube"></i></a>
+                        <a href="#" onclick="openGitHub()"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="links-column">
+                        <h4>Навигация</h4>
+                        <ul>
+                            <li><a href="../index.php">Главная</a></li>
+                            <li><a href="about.html">О нас</a></li>
+                            <li><a href="servers.html">Описание серверов</a></li>
+                            <li><a href="donate.html">Донат</a></li>
+                            <li><a href="team.html">Наша команда</a></li>
+                        </ul>
+                    </div>
+                    <div class="links-column">
+                        <h4>Ресурсы</h4>
+                        <ul>
+                            <li><a href="launcher.html">Скачать лаунчер</a></li>
+                            <li><a href="#">Список модов</a></li>
+                            <li><a href="#">Карта мира</a></li>
+                            <li><a href="#">Гайды</a></li>
+                            <li><a href="#">Частые вопросы</a></li>
+                        </ul>
+                    </div>
+                    <div class="links-column">
+                        <h4>Проект</h4>
+                        <ul>
+                            <li><a href="about.html#idea">Идея проекта</a></li>
+                            <li><a href="team.html">Наша команда</a></li>
+                            <li><a href="donate.html">Поддержать проект</a></li>
+                            <li><a href="#">Правила сервера</a></li>
+                            <li><a href="#">Контакты</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024-2026 DeepWorld. Все права защищены.</p>
+                <p class="disclaimer">DeepWorld является неофициальным проектом, не связанным с Mojang AB или Cartoon Network.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script>
+        // Анимация загрузки
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, 800);
+            
+            // Анимация таймлайна
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateX(0)';
+                        }, index * 200);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px'
+            });
+            
+            timelineItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateX(-20px)';
+                item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(item);
+            });
+        });
+        
+        // Функции для социальных сетей
+        function joinDiscord() {
+            showNotification('Присоединяйтесь к нашему Discord серверу!', 'info');
+        }
+        
+        function openVK() {
+            showNotification('Мы ВКонтакте!', 'info');
+        }
+        
+        function openYouTube() {
+            showNotification('Наш YouTube канал', 'info');
+        }
+        
+        function openGitHub() {
+            showNotification('Исходный код на GitHub', 'info');
+        }
+        
+        // Показ уведомлений
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+                <button onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.style.opacity = '0';
+                    setTimeout(() => notification.remove(), 300);
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

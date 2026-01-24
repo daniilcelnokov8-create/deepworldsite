@@ -1,0 +1,23 @@
+RewriteEngine On
+
+# Перенаправляем все запросы на index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Разрешаем доступ к файлам в папках
+RewriteRule ^api/(.*)$ api/$1 [L]
+RewriteRule ^pages/(.*)$ pages/$1 [L]
+RewriteRule ^config/(.*)$ config/$1 [L]
+RewriteRule ^assets/(.*)$ assets/$1 [L]
+
+# Запрещаем доступ к .env и другим конфиденциальным файлам
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "\.(env|sql|log)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

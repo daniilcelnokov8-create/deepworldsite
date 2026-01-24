@@ -1,83 +1,88 @@
 <?php
-header('Content-Type: text/html; charset=utf-8');
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Проверка подключения к БД</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
-        .success { color: green; font-weight: bold; }
-        .error { color: red; font-weight: bold; }
-        pre { background: #f5f5f5; padding: 10px; border-radius: 5px; }
-    </style>
-</head>
-<body>
-    <h1>Проверка подключения к базе данных</h1>
+// test_db.php - тест подключения к БД
+echo "<h1>Тест подключения к базе данных</h1>";
+
+// Вариант 1: Простое подключение
+echo "<h3>Вариант 1: Простое подключение</h3>";
+try {
+    $pdo = new PDO(
+        "mysql:host=localhost;dbname=ce032318_dws;charset=utf8mb4", 
+        "ce032318_dws", 
+        "lfybbkdkflbvbhjdbx0608%"
+    );
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "✓ Подключение успешно<br>";
     
-    <?php
+    // Проверяем таблицы
+    $tables = $pdo->query("SHOW TABLES")->fetchAll(PDO::FETCH_COLUMN);
+    echo "✓ Найдено таблиц: " . count($tables) . "<br>";
+    
+    if (count($tables) > 0) {
+        echo "Список таблиц:<br>";
+        foreach ($tables as $table) {
+            echo "- $table<br>";
+        }
+    }
+    
+    // Проверяем таблицу users
+    if (in_array('users', $tables)) {
+        $stmt = $pdo->query("SELECT COUNT(*) as count FROM users");
+        $data = $stmt->fetch();
+        echo "✓ Таблица users существует, записей: " . $data['count'] . "<br>";
+    } else {
+        echo "✗ Таблица users не найдена<br>";
+    }
+    
+} catch(PDOException $e) {
+    echo "✗ Ошибка: " . $e->getMessage() . "<br>";
+    echo "<pre>Код ошибки: " . $e->getCode() . "</pre>";
+}
+
+// Вариант 2: Через config файл
+echo "<h3>Вариант 2: Через config/database.php</h3>";
+if (file_exists('config/database.php')) {
     require_once 'config/database.php';
     
-    echo "<h2>Параметры подключения:</h2>";
-    echo "<pre>";
-    echo "Хост: " . DB_HOST . "\n";
-    echo "База данных: " . DB_NAME . "\n";
-    echo "Пользователь: " . DB_USER . "\n";
-    echo "Пароль: " . str_repeat('*', strlen(DB_PASS)) . "\n";
-    echo "</pre>";
-    
-    echo "<h2>Тестирование подключения:</h2>";
-    
     try {
-        $db = db();
-        echo "<p class='success'>✓ Подключение к БД успешно установлено!</p>";
-        
-        // Проверяем версию MySQL
-        $version = $db->query('SELECT VERSION() as version')->fetch();
-        echo "<p>Версия MySQL: " . $version['version'] . "</p>";
-        
-        // Проверяем существующие таблицы
-        $tables = $db->query("SHOW TABLES")->fetchAll(PDO::FETCH_COLUMN);
-        
-        if (count($tables) > 0) {
-            echo "<p>Найдены таблицы:</p><ul>";
-            foreach ($tables as $table) {
-                echo "<li>$table</li>";
-            }
-            echo "</ul>";
+        // Проверяем что $pdo создан
+        if (isset($pdo)) {
+            echo "✓ Подключение через config/database.php успешно<br>";
+            
+            // Простой тестовый запрос
+            $result = $pdo->query("SELECT VERSION() as version");
+            $data = $result->fetch();
+            echo "✓ Версия MySQL: " . $data['version'] . "<br>";
         } else {
-            echo "<p>Таблицы не найдены. База данных пустая.</p>";
+            echo "✗ Переменная \$pdo не определена в config/database.php<br>";
         }
-        
-    } catch (PDOException $e) {
-        echo "<p class='error'>✗ Ошибка подключения: " . $e->getMessage() . "</p>";
-        echo "<h3>Рекомендации:</h3>";
-        echo "<ul>";
-        echo "<li>Проверьте правильность данных в config/database.php</li>";
-        echo "<li>Убедитесь, что база данных создана в панели TimeWeb</li>";
-        echo "<li>Проверьте, что пользователь БД имеет права на подключение</li>";
-        echo "<li>В TimeWeb хост обычно 'localhost'</li>";
-        echo "</ul>";
+    } catch(PDOException $e) {
+        echo "✗ Ошибка при тестовом запросе: " . $e->getMessage() . "<br>";
     }
-    ?>
-    
-    <h2>Создание таблиц (если их нет):</h2>
-    <form method="post">
-        <button type="submit" name="create_tables">Создать таблицы</button>
-    </form>
-    
-    <?php
-    if (isset($_POST['create_tables'])) {
-        echo "<h3>Создание таблиц...</h3>";
-        
-        try {
-            $sql = file_get_contents('config/schema.sql');
-            $db->exec($sql);
-            echo "<p class='success'>✓ Таблицы успешно созданы!</p>";
-        } catch (PDOException $e) {
-            echo "<p class='error'>✗ Ошибка создания таблиц: " . $e->getMessage() . "</p>";
-        }
-    }
-    ?>
-</body>
-</html>
+} else {
+    echo "✗ Файл config/database.php не найден<br>";
+}
+
+// Информация о PHP
+echo "<h3>Информация о среде</h3>";
+echo "Версия PHP: " . phpversion() . "<br>";
+echo "PDO доступен: " . (extension_loaded('pdo_mysql') ? 'Да' : 'Нет') . "<br>";
+echo "MySQL доступен: " . (function_exists('mysqli_connect') ? 'Да' : 'Нет') . "<br>";
+
+// Проверяем доступ к серверу БД
+echo "<h3>Проверка доступа к серверу БД</h3>";
+$test_host = 'localhost';
+$test_port = 3306;
+
+if (fsockopen($test_host, $test_port, $errno, $errstr, 10)) {
+    echo "✓ Сервер MySQL доступен на $test_host:$test_port<br>";
+} else {
+    echo "✗ Сервер MySQL недоступен: $errstr ($errno)<br>";
+}
+
+echo "<h3>Рекомендации</h3>";
+echo "1. Проверьте правильность имени базы данных: ce032318_dws<br>";
+echo "2. Проверьте логин: ce032318_dws<br>";
+echo "3. Проверьте пароль<br>";
+echo "4. Убедитесь что пользователь имеет права на базу данных<br>";
+echo "5. Проверьте хост (может быть не localhost, а IP или домен)<br>";
+?>
